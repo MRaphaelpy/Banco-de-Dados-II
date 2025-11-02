@@ -370,22 +370,47 @@ cliente (1) ──→ (N) ordem_transporte
 - Passageiro → Passageiro_Estudante/PCD/Idoso (1:1 opcional)
 - Funcionário → Motorista/Cobrador (1:1 especialização)
 - Funcionário → Cargo/Departamento (N:1)
+- Funcionario → escala_trabalho (1:1)
 
 **Veículos:**
 - Veículo → Modelo_Veiculo (N:1)
 - Veículo → Manutenção (1:N)
+- Veiculo → Garagem (1:1) opcional (onibus, vans, etc)
 - Manutenção → Item_Manutencao (1:N)
 - Item_Manutencao → Peça/Serviço (N:1)
+- 
 
 **Operação:**
 - Linha → Rota (1:N)
 - Rota → Parada_Rota → Parada (N:N)
 - Viagem → Veiculo + Motorista + Rota (N:1)
 - Cartao_Bilhetagem → Utilizacao_Cartao (1:N)
+- Cartao_Bilhetagem → tarifa (1:N)
+- Cartao_Bilhetagem → recarga (1:N)
+- viagem → escala (1:N)
+- Viagem → ponto_viagem (1:N)
 
+**Logística e Cargas**
+- Cliente → ordem_transporte (1:N)
+- ordem_transporte → itens_ordem_transporte (1:N)
+- itens_ordem_transporte → carga (1:1)
+- carga → tipo_carga (1:1) 
+- carga → volume(1:1)
 
-Para Testar esse banco de dados voce pode ussar esse banco vode pode usar o dbeaver ou mysql workbench, e o docker
-
+**Monitoramento e segurança**
+- veiculo_gps → rastreamento_gps(1:N)
+- veiculo_cerca → cerca_eletronica (1:N)
+- camera → gravaçao (1:N)
+- gravaçao → incidente_segurança (N:N)
+- 
+**controle de qualidade**
+- pesquisa_satisfacao → questao_pesquisa (1:N)
+- questao_pesquisa → resposta_pesquisa (1:1)
+- respota_pesquisa → detalhe_resposta_pesquisa (1:1)
+- 
+- 
+**Gestao de operaçoes**
+- 
 ```bash# Puxe a imagem oficial do MySQL
 docker pull mysql:latest            
 # Inicie um contêiner MySQL
